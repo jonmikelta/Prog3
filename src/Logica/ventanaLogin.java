@@ -14,12 +14,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.undo.CannotRedoException;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.SystemColor;
 
-public class VentanaLogin extends JFrame {
+public class ventanaLogin extends JFrame {
 
 	private JPanel contentPane;
 	public static JTextField textUsuario;
 	public static JPasswordField textPassword;
+	private JTextField txtTrendingNews;
 	
 	/**
 	 * Launch the application.
@@ -28,7 +32,7 @@ public class VentanaLogin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() throws NullPointerException, FileSystemNotFoundException{
 				try {
-					VentanaLogin frame = new VentanaLogin();
+					ventanaLogin frame = new ventanaLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +44,7 @@ public class VentanaLogin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaLogin() {
+	public ventanaLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -49,20 +53,22 @@ public class VentanaLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(12, 32, 56, 16);
+		lblUsuario.setFont(new Font("Lucida Sans Unicode", Font.PLAIN, 15));
+		lblUsuario.setBounds(90, 69, 112, 30);
 		contentPane.add(lblUsuario);
 		
-		JLabel lblPassword = new JLabel("password");
-		lblPassword.setBounds(12, 75, 56, 16);
+		JLabel lblPassword = new JLabel("Contrase\u00F1a");
+		lblPassword.setFont(new Font("Lucida Sans Unicode", Font.PLAIN, 15));
+		lblPassword.setBounds(90, 112, 112, 30);
 		contentPane.add(lblPassword);
 		
 		textUsuario = new JTextField();
-		textUsuario.setBounds(136, 29, 116, 22);
+		textUsuario.setBounds(227, 73, 116, 22);
 		contentPane.add(textUsuario);
 		textUsuario.setColumns(10);
 		
 		textPassword = new JPasswordField();
-		textPassword.setBounds(136, 72, 116, 22);
+		textPassword.setBounds(227, 116, 116, 22);
 		contentPane.add(textPassword);
 		
 		final Fichero1 data= new Fichero1();
@@ -82,34 +88,34 @@ public class VentanaLogin extends JFrame {
 						String passwordHashMap = usuarios.get(nombreUsuario);
 						if(clave.equals(passwordHashMap))
 						{
-							JOptionPane.showMessageDialog(VentanaLogin.this, "Bienvenido al juego");
+							JOptionPane.showMessageDialog(ventanaLogin.this, "Bienvenido al juego");
 						}
 						else
 						{
-							JOptionPane.showMessageDialog(VentanaLogin.this,"Usuario o contraseña incorrectos");
+							JOptionPane.showMessageDialog(ventanaLogin.this,"Usuario o contraseña incorrectos");
 						}
 					} catch (CannotRedoException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(VentanaLogin.this, "Caracteres no validos");
+						JOptionPane.showMessageDialog(ventanaLogin.this, "Caracteres no validos");
 					}
 					
 					
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(VentanaLogin.this,"Usuario o contraseña incorrectos");
+					JOptionPane.showMessageDialog(ventanaLogin.this,"Usuario o contraseña incorrectos");
 				}
 				
 			}
 
 			private void ComprobarPass(String clave) {
-				// TODO Auto-generated method stub
+				// Se comprueba si el usuario y contraseña almacenados en la base de datos coinciden
 				
 			}
 		});
 		
 		
-		btnEntrar.setBounds(36, 150, 97, 25);
+		btnEntrar.setBounds(90, 166, 116, 25);
 		contentPane.add(btnEntrar);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -118,8 +124,30 @@ public class VentanaLogin extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(194, 150, 97, 25);
+		btnSalir.setBounds(227, 166, 116, 25);
 		contentPane.add(btnSalir);
+		
+		JButton btnRegistrarse = new JButton("Registrarse");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			// Nueva ventana registrarse, con los datos del usuario que iran almacenados en la base de datos
+				JOptionPane.showMessageDialog(ventanaLogin.this,"Rellena los siguientes datos");
+			}
+		});
+		btnRegistrarse.setBounds(90, 204, 116, 25);
+		contentPane.add(btnRegistrarse);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 432, 50);
+		contentPane.add(panel);
+		
+		txtTrendingNews = new JTextField();
+		txtTrendingNews.setFont(new Font("Tahoma", Font.BOLD, 34));
+		txtTrendingNews.setEditable(false);
+		txtTrendingNews.setBackground(SystemColor.control);
+		txtTrendingNews.setText("Trending News");
+		panel.add(txtTrendingNews);
+        
 		
 		
 	}
